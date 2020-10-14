@@ -139,6 +139,12 @@ func buildControllerContext(ctx context.Context, stopCh <-chan struct{}, opts *o
 		return nil, nil, fmt.Errorf("error creating rest config: %s", err.Error())
 	}
 
+	// hardcode QPS/Burst until https://github.com/jetstack/cert-manager/pull/3382
+	// makes it to a release
+	kubeCfg.QPS = 100
+	kubeCfg.Burst = 200
+	log.Info("using hardcoded QPS and burst values")
+
 	// Add User-Agent to client
 	kubeCfg = rest.AddUserAgent(kubeCfg, util.CertManagerUserAgent)
 
