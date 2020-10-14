@@ -150,7 +150,7 @@ func (c *controller) Register(ctx *controllerpkg.Context) (workqueue.RateLimitin
 // per second. It may be better to remove this altogether in favour of some
 // other method of rate limiting creations.
 // TODO: make this configurable
-const MaxChallengesPerSchedule = 20
+const MaxChallengesPerSchedule = 1000
 
 // runScheduler will execute the scheduler's ScheduleN function to determine
 // which, if any, challenges should be rescheduled.
